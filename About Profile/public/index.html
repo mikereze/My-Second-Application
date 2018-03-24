@@ -1,0 +1,265 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <html>
+
+<head>
+    
+    <style>
+        #key-input{
+            border-radius: 2px;
+            border-color:black;
+            
+        }
+        #meaning-input{
+              border-radius: 2px;
+            border-color:black;
+        }
+        #set{
+            background-color:#47add5;
+        }
+        #view{
+            background-color:#47add5;
+        }
+        #container{
+            width:100%;
+            height:600px;
+
+        }
+        #contains{
+           
+            width:40%;
+            height:80%;
+            margin-left:5%;
+            padding-left: 20px;
+            margin-top:10px;
+            float:left;
+            border-right: 2px solid black;
+
+        }
+        #contains2{
+            float:left;
+            margin-left:10%;
+            
+            margin-top: 10px;
+        }
+        </style>
+</head>
+
+<body>
+    <div id ="container">
+
+
+       
+<div id="contains">
+<span style="font-size:25px"><span style="margin-left:60px"><b>Fill the form if you don't have profile</b></span></span><br/><br/>
+        <span>First Name</span>
+    <input id="firstname-input" type="text" name="firstname"></br><br/>
+    <span> Last Name</span>
+    <input id="lastname-input" type="text" name="lastname"></br><br/>
+    <span> Address</span>
+    <input id="address-input" type="text" name="address"></br><br/>
+    <span> Email</span>
+    <input id="email-input" type="text" name="email"></br><br/>
+    <span> Age</span>
+    <input id="age-input" type="text" name="age"></br><br/>
+    <span> Phone number</span>
+    <input id="phonenumber-input" type="text" name="phonenumber"></br><br/>
+    <span> House number </span>
+    <input id="housenumber-input" type="text" name="housenumber"></br><br/>
+    <span> Sub-city</span>
+    <input id="subcity-input" type="text" name="subcity"></br><br/>
+    <span>Short Biography</span>
+    <textarea id="bio-input" type="text" name="bio" ></textarea><br/><br/>
+    <button id="set">Add your Profile</button><br/><br/>
+</div>
+<div id="contains2">
+     <span style="font-size:25px"><b>Search for your Profile</b></span><br/><br/>
+    <input id="search" type="text" name="search">
+    <button id="view">View your Profile</button><br/><br/>
+    <div id="suggestion">
+    </div>
+    <div id="response">
+        <span id="fname"></span><span id="firstnameresponse"></span><br/>
+        <span id="lname"></span><span id="lastnameresponse"></span><br/>
+        <span id="address"></span><span id="addressresponse"></span><br/>
+        <span id="email"></span><span id="emailresponse"></span><br/>
+        <span id="age"></span><span id="ageresponse"></span><br/>
+        <span id="phone"></span><span id="phonenumberresponse"></span><br/>
+        <span id="house"></span><span id="housenumberresponse"></span><br/>
+        <span id="subcity"></span><span id="subcityresponse"></span><br/>
+        <span id="bio"></span><span id="bioresponse"></span>
+    </div>
+    
+    </div>
+    </div>
+    <script> 
+    var search = document.getElementById("search");
+     function closure(text,value){
+                return function(){
+                    //alert(text);
+                    search.value = text;
+
+                     fname.textContent = "Firstname :";
+                            lname.textContent = "Lastname :";
+                            address.textContent = "Address :";
+                            email.textContent = "Email   :";
+                            age.textContent = "Age :";
+                            phone.textContent = "Phone number :";
+                            house.textContent = "House number :";
+                            subcity.textContent = "Sub city :";     
+                            bio.textContent = "Short Biography :";
+                     var splitted2 = value.split("~");
+                            firstnameresponse.textContent =  splitted2[0];
+                            lastnameresponse.textContent = splitted2[1];
+                            addressresponse.textContent = splitted2[2];
+                            emailresponse.textContent = splitted2[3];
+                            ageresponse.textContent = splitted2[4];
+                            phonenumberresponse.textContent = splitted2[5];
+                            housenumberresponse.textContent = splitted2[6];
+                            subcityresponse.textContent = splitted2[7];
+                            bioresponse.textContent = splitted2[8];
+                }
+            }
+    var b = document.getElementById('set');
+    var view = document.getElementById('view');
+            b.onclick = function(){
+                
+                var firstname = document.getElementById('firstname-input');
+                var lastname = document.getElementById('lastname-input');
+                var address = document.getElementById('address-input');
+                var email = document.getElementById('email-input');
+                var age = document.getElementById('age-input');
+                var phonenumber = document.getElementById('phonenumber-input');
+                var housenumber = document.getElementById('housenumber-input');
+                var subcity = document.getElementById('subcity-input');
+                var bio = document.getElementById('bio-input');
+           
+                var add_firstname = firstname.value;
+                var add_lastname = lastname.value;
+                var add_address = address.value;
+                var add_email = email.value;
+                var add_age = age.value;
+                var add_phonenumber = phonenumber.value;
+                var add_housenumber = housenumber.value;
+                var add_subcity = subcity.value;
+                var add_bio = bio.value;
+                
+                var http = new XMLHttpRequest();
+                
+                http.onreadystatechange = function(){
+                    if (http.readyState == XMLHttpRequest.DONE && http.status == 200){
+                      
+                       firstname.value= " ";
+                       lastname.value = " ";
+                       address.value=" ";
+                       email.value=" ";
+                       age.value=" ";
+                       phonenumber.value=" ";
+                       housenumber.value=" ";
+                       subcity.value=" ";
+                       bio.value=" ";
+                    }
+                    
+                }
+                http.open('GET' , '/add?firstname='+add_firstname+'&lastname='+add_lastname+'&address='+add_address
+                +'&email='+add_email+'&age='+add_age+'&phonenumber='+add_phonenumber+'&housenumber='+add_housenumber
+                +'&subcity='+add_subcity+'&bio='+add_bio);
+                http.send();
+            }
+            view.onclick = function(){
+              let httpRequest = new XMLHttpRequest();
+              var searchinput = document.getElementById("search");
+              var firstnamelabel = document.getElementById("fname");
+              var lastnamelabel = document.getElementById("lname");
+              var addresslabel = document.getElementById("address");
+              var emaillabel = document.getElementById("email");
+              var agelabel = document.getElementById("age");
+              var phonelabel = document.getElementById("phone");
+              var houselabel = document.getElementById("house");
+              var subcitylabel = document.getElementById("subcity");
+              var biolabel = document.getElementById("bio");
+
+              var input = searchinput.value;
+
+              
+
+                httpRequest.onreadystatechange = function(){
+                   if(httpRequest.readyState == XMLHttpRequest.DONE){
+                        if(httpRequest.status == 200){
+                            console.log("im in the html file");
+
+                            firstnamelabel.textContent = "Firstname :";
+                            lastnamelabel.textContent = "Lastname :";
+                            addresslabel.textContent = "Address :";
+                            emaillabel.textContent = "Email   :";
+                            agelabel.textContent = "Age :";
+                            phonelabel.textContent = "Phone number :";
+                            houselabel.textContent = "House number :";
+                            subcitylabel.textContent = "Sub city :";     
+                            biolabel.textContent = "Short Biography :";
+
+                            var tobesplitted = httpRequest.responseText;
+                            var splitted = tobesplitted.split("~");
+                            firstnameresponse.textContent =  splitted[0];
+                            lastnameresponse.textContent = splitted[1];
+                            addressresponse.textContent = splitted[2];
+                            emailresponse.textContent = splitted[3];
+                            ageresponse.textContent = splitted[4];
+                            phonenumberresponse.textContent = splitted[5];
+                            housenumberresponse.textContent = splitted[6];
+                            subcityresponse.textContent = splitted[7];
+                            bioresponse.textContent = splitted[8];
+
+                           }
+                        else{
+                            console.log("im in the html file2");
+                            input.textContent = "";
+                            }
+                        }
+                    }
+                    
+                
+                httpRequest.open('GET', '/dictionary?name=' + input, true);
+                httpRequest.send();
+
+
+            }
+
+
+            search.oninput = function() {
+                //var buttons = document.getElementById('button');
+                
+                //var b;
+                let httpRequest2 = new XMLHttpRequest();
+                httpRequest2.onreadystatechange = function(){
+                   if(httpRequest2.readyState == XMLHttpRequest.DONE){
+                        if(httpRequest2.status == 200){
+                            suggestion.innerHTML = httpRequest2.responseText;
+                            var buttons = document.getElementsByClassName("button");
+                            for(var bu=0;bu<buttons.length;bu++){
+                                buttons[bu].onclick = closure(buttons[bu].textContent,buttons[bu].getAttribute("value"));
+                            }
+                            
+                           }
+                        else{
+                            suggestion.textContent = "";
+                            }
+                        }
+                    }
+                
+                
+                httpRequest2.open('GET', '/suggestion?input='+search.value);
+                httpRequest2.send();
+            }
+
+        
+
+            </script>
+</body>
+
+</html>
+    
