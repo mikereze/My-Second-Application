@@ -1,4 +1,4 @@
-# Second Application
+# My Second Application
 
 
 Name:Michale Rezene 
